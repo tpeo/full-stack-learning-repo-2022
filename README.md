@@ -1,4 +1,5 @@
 # Full Stack Learning Repository Fall 2022
+
 Welcome new Engineering fellows! This respotiory will serve as our Fall 2022 Engineering Full-Stack Curriculum, including slides, and homework. 
 
 Full-stack engineering is about using technology to implement and automate solutions to real-world problems. A full-stack engineer constantly weighs the pros/cons of many different solutions, tools, and ideas. There are many ways to solve any given problem, but finding the most elegant solution often takes much deliberation and a vast amount of knowledge. 
@@ -8,6 +9,7 @@ Here's what you'll learn from this course:
 1. How to think about real-world problems and design software solutions
 2. Learn the basics of how to make and deploy websites, API's, and web apps
 3. How to navigate the ever-changing ocean of technology and stay up-to-date
+
 
 ## Useful Links
 [TPEO Slack](https://join.slack.com/t/txproduct/shared_invite/enQtOTMzOTYxMjYzMDU3LWMyODI2NGM4ZDlmODUwZTc0MTlmMGYxNDM5YjI5ZThkYzYwODA4MTQwMTJhMWM4NjdjZTlkMTRjZGU4MDUxNTE)
