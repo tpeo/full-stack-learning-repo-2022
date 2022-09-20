@@ -1,5 +1,15 @@
 # Full Stack Learning Repository Fall 2022
-Welcome new Engineering fellows! This respotiory will serve as our Fall 2022 Engineering Full-Stack Curriculum, including slides, and homework. By the end of the semester, you should be able to confidently create your own web applications using React and Firebase!
+
+Welcome new Engineering fellows! This respotiory will serve as our Fall 2022 Engineering Full-Stack Curriculum, including slides, and homework. 
+
+Full-stack engineering is about using technology to implement and automate solutions to real-world problems. A full-stack engineer constantly weighs the pros/cons of many different solutions, tools, and ideas. There are many ways to solve any given problem, but finding the most elegant solution often takes much deliberation and a vast amount of knowledge. 
+
+Here's what you'll learn from this course:
+
+1. How to think about real-world problems and design software solutions
+2. Learn the basics of how to make and deploy websites, API's, and web apps
+3. How to navigate the ever-changing ocean of technology and stay up-to-date
+
 
 ## Useful Links
 [TPEO Slack](https://join.slack.com/t/txproduct/shared_invite/enQtOTMzOTYxMjYzMDU3LWMyODI2NGM4ZDlmODUwZTc0MTlmMGYxNDM5YjI5ZThkYzYwODA4MTQwMTJhMWM4NjdjZTlkMTRjZGU4MDUxNTE)
@@ -10,6 +20,17 @@ Welcome new Engineering fellows! This respotiory will serve as our Fall 2022 Eng
 
 [Recordings for Lectures (TBD)]()
 
+# Roadmap
+- Week 1: Git & HTML
+- Week 2: HTML, CSS, & JS
+- Week 3: JS in Browser & APIs
+- Week 4: ReactJS & Web Frameworks
+- Week 5: Advanced ReactJS 
+- Week 6: Intro to Backend Dev & Databases
+- Week 7: Authentication, Authorization, & Middleware
+- Week 8: Cross Collaboration & Project Management
+- Week 9: File Storage & Hosting
+- Week 10: Advanced Web Topics
 # Fork Environment
 This repository will be following a fork structure, meaning that fellows will **commit to their own local respository** while **pulling new weekly content from this one upstream**. Weekly content will be updated on the master branch, but a copy of all previous week's content will be available via branches.
 
@@ -65,3 +86,6 @@ You should pull approximately every week when new content arrives. These steps w
 
 ## Suggesting Changes to the Main Repository 
 We realize that like everyone, we're not perfect so we'd love to hear constructive feedback. To suggest a change, open a pull request to the main repository and we'll get on it ASAP. **Please DO NOT push directly to the main branch unless permitted to do so.**
+
+## Homework
+This course will include homework each week to reinforce your knowledge. For engineering fellows, homework is mandatory and is due by the next Tuesday of classes. We will try to provide feedback on the homework so please send us your email and forked repository at the following link.
