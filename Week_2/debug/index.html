@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: powderblue;
+      }
+      input.text {
+        color: orange;
+      }
+      button.hover {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <input type="text" id="number" value="0" />
+    </form>
+    <button onclick="() => incrementValue()">Increase</button>
+    <script>
+      function incrementValue() {
+        var value = parseInt(document.getElementById("number").value);
+        value++;
+        document.getElementById("number").value = value;
+      }
+    </script>
+  </body>
+</html>

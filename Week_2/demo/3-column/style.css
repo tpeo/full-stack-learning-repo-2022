@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&display=swap");
+
+/* colors */
+
+:root {
+  --prim-orange: hsl(31, 77%, 52%);
+  --prim-cyan: hsl(184, 100%, 22%);
+  --prim-dark-cyan: hsl(179, 100%, 13%);
+  --neu-white: hsla(0, 0%, 100%, 0.75);
+  --neu-gray: hsl(0, 0%, 95%);
+
+  --gray: #999;
+  --dark-gray: #555;
+  --black: #000;
+}
+
+/* box sizing */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lexend Deca", sans-serif;
+  background-color: var(--neu-gray);
+  font-size: 15px;
+  overflow: hidden;
+  display: flex;
+  height: 100vh;
+  overflow: auto;
+  color: var(--neu-white);
+}
+
+/* style cards */
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+article {
+  max-width: 278px;
+  height: 450px;
+  padding: 42px;
+  position: relative;
+}
+
+article.sedan {
+  background-color: var(--prim-orange);
+  border-radius: 7px 0 0 7px;
+}
+
+article.suv {
+  background-color: var(--prim-cyan);
+}
+
+article.luxury {
+  background-color: var(--prim-dark-cyan);
+  border-radius: 0 7px 7px 0;
+}
+
+img {
+  margin-bottom: 36px;
+}
+
+h1 {
+  font-family: "Big Shoulders Display", sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--neu-gray);
+  margin-bottom: 1.5rem;
+}
+
+article p {
+  color: var(--neu-white);
+  font-size: 13.8px;
+  line-height: 1.5rem;
+}
+
+button {
+  position: absolute;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  padding: 14px;
+  width: 146px;
+  border-radius: 25px;
+  outline: none;
+  border: 2px solid var(--neu-gray);
+  font-family: inherit;
+  transition: all 0.2s ease-in-out;
+  bottom: 42px;
+}
+
+.sedan button {
+  background: var(--neu-gray);
+  color: var(--prim-orange);
+}
+
+.suv button {
+  background-color: var(--neu-gray);
+  color: var(--prim-cyan);
+}
+
+.luxury button {
+  background-color: var(--neu-gray);
+  color: var(--prim-dark-cyan);
+}
+
+button:hover {
+  background-color: transparent;
+  color: var(--neu-gray);
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+
+/* style tablet and mobile */
+
+@media only screen and (max-width: 844px) {
+  body {
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+    flex-wrap: wrap;
+  }
+
+  main {
+    padding: 50px 0;
+    flex-direction: column;
+  }
+
+  article.sedan {
+    border-radius: 7px 7px 0 0;
+  }
+
+  article.luxury {
+    border-radius: 0 0 7px 7px;
+  }
+
+  article p {
+    font-size: 0.77rem;
+  }
+}
