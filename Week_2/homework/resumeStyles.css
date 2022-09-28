@@ -1,0 +1,32 @@
+main{
+    font-size: 18px;
+    align-items: center;
+    padding-right: 15%;
+    padding-left: 15%;
+}
+
+.section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.box{
+    flex: 1;
+    height: 100%;
+    margin: 5px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color:lightgray;
+}
+
+h1{
+    font-size: 40px;
+}
+
+.subheader{
+    font-size: 22px;
+}
