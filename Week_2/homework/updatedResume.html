@@ -10,17 +10,19 @@
 </head>
 
 <body>
+	<script src="resume.js"></script>
 	<main>
-		<h1 style="text-align: center;"><strong>Justin Sasek</strong></h1>
-		<div class="section",  style="text-align: center;">
+		<h1 style="text-align: center;">Justin Sasek</h1>
+		<div class="section" , style="text-align: center;">
 			<div class="box"><a href="mailto:justinsasek@gmail.com">justinsasek@gmail.com</a></div>
 			<div class="box">(817) 771-9723</div>
-			<div class="box"><a href="https://linkedin.com/in/justinsasek" , target="_blank">linkedin.com/in/justinsasek</a></div>
+			<div class="box"><a href="https://linkedin.com/in/justinsasek" ,
+					target="_blank">linkedin.com/in/justinsasek</a></div>
 			<div class="box"><a href="https://github.com/justinsasek" target="_blank">github.com/justinsasek</a></div>
 			<div class="box">Houston, TX</div>
 		</div>
 		<br>
-		<div class = "subheader"><strong>EDUCATION</strong></div>
+		<div class="subheader">EDUCATION</div>
 		<hr />
 		<div class="section">
 			<div class="box">
@@ -37,66 +39,73 @@
 					</tr>
 				</table>
 			</div>
-			<div class="box", style="flex: 0">
+			<div class="box" , style="flex: 0">
 				<strong>SAT: </strong>
 				<br>
 				1570/1600
 			</div>
 		</div>
 
-		<div class = "subheader"><strong>HONORS</strong></div>
+		<div class="subheader">HONORS</div>
 		<hr />
 		<div class="section" , style="text-align: center;">
-			<div class="box">
+			<div class="box" , style="flex:10">
 				<div>NHS Semifinalist Scholarship</div>
 				<div>Equitable Excellence Scholarship</div>
 				<div>Sarah Lacy Memorial Scholarship</div>
 				<div>Carroll AP Booster Scholarship</div>
 			</div>
-			<div class="box">
+			<div class="box" , style="flex:10">
 				<div>Southlake Carroll High School Salutatorian</div>
 			</div>
-			<div class="box">
+			<div class="box" , style="flex:10">
 				<div>General National Honor Society</div>
 				<div>Science National Honor Society</div>
 				<div>Technical National Honor Society</div>
 				<div>Rho Kappa Social Studies National Honor Society</div>
 			</div>
 		</div>
-		<div class = "subheader"><strong>EXPERIENCE</strong></div>
+		<div class="subheader">
+			EXPERIENCE
+			<input onclick="toggleXP()" type="button" id="xpButton" value="expand"></input>
+
+		</div>
 		<hr />
 		<div class="section">
-			<article class="box">
+			<article class="box" , style="flex:14">
 				<div><strong>Lummus Technologies</strong></div>
 				<div><i>Robotic Manufacturing Intern</i></div>
 				<div>Houston, TX<span style="float: right;"> June 2022 - August 2022</span></div>
-				<hr />
-				<div><i>
+				<div id="xp1" style="display: none">
+					<hr />
+					<i>
 						Chemical technologies company that researches, scales, manufactures, and implements chemical
 						process
 						technologies
-					</i></div>
-				<ul>
-					<li>
-						Debugged programmable logic controller in and human-machine interface in C++ to prevent critical
-						line failures
-					</li>
-					<li>
-						Designed and 3D-printed eight custom parts using Fusion 360 to solve mechanical and safety
-						deficiencies
-					</li>
-					<li>
-						Setup Fiix inventory software with 1300+ entries, communicating with maintenance team, to
-						streamline
-						robotic maintenance
-					</li>
-				</ul>
+					</i>
+					<ul>
+						<li>
+							Debugged programmable logic controller in and human-machine interface in C++ to prevent critical
+							line failures
+						</li>
+						<li>
+							Designed and 3D-printed eight custom parts using Fusion 360 to solve mechanical and safety
+							deficiencies
+						</li>
+						<li>
+							Setup Fiix inventory software with 1300+ entries, communicating with maintenance team, to
+							streamline
+							robotic maintenance
+						</li>
+					</ul>
+				</div>
+				
 			</article>
-			<article class="box">
+			<article class="box" , style="flex:12">
 				<div><strong>Self-Employed</strong></div>
 				<div> <i>Technology Consultant</i></div>
 				<div>Grapevine, TX<span style="float: right">October 2019 - June 2022</span></div>
-				<ul>
+				<ul id="xp2" style="display: none">
 					<li>
 						Launched business database system on Airtable for three organizations to track inventory,
 						employees,
@@ -109,12 +118,12 @@
 					</li>
 				</ul>
 			</article>
-			<article class="box">
+			<article class="box" , style="flex:11">
 				<div><strong>Grapevine Community Sailing Education Fund</strong></div>
 				<div><i>Head Counselor and Manager</i></div>
 				<div>Grapevine, TX<span style="float: right">June 2021 - July 2021</span></div>
 
-				<ul>
+				<ul id="xp3" style="display: none">
 					<li>
 						Supervised 11 employees and 40 campers for three sessions, increasing camper engagement and team
 						sign-ups by 50%
@@ -127,7 +136,10 @@
 				</ul>
 			</article>
 		</div>
-		<div class = "subheader"><strong>PROJECTS</strong></div>
+		<div class="subheader">
+			PROJECTS
+			<input type="button", value="expand", id = "pButton", onclick="toggleP()">
+		</div>
 		<hr />
 		<div class="section">
 			<article class="box">
@@ -135,7 +147,7 @@
 					<strong>Smart Board Game Table</strong>
 					<span style="float: right">Fall 2021 - Spring 2022</span>
 				</div>
-				<ul>
+				<ul id="p1", style="display: none">
 					<li>
 						Developed software in C++ for custom board game table to predict wait times, change lighting
 						color,
@@ -157,45 +169,52 @@
 				</ul>
 			</article>
 		</div>
-		<div class = "subheader"><strong>
-				LEADERSHIP EXPERIENCE AND ACTIVITIES
-			</strong></div>
+		<div class="subheader">
+			LEADERSHIP EXPERIENCE AND ACTIVITIES
+			<input value="expand", onclick="toggleAct()", type="button", id="actButton">
+		</div>
 		<hr />
 		<div class="section">
 			<article class="box">
 				<div><strong>Engineering and Computational Learning of Artificial Intelligence in Robotics</strong>
 				</div>
 				<div>Active Member<span style="float: right">Fall 2022 - Present</span></div>
-				<hr />
-				<div><i>
+				<div id="act1", style="display: none">
+					<hr />
+					<i>
 						Student org that explores robotic fields such as autonomy, neural networks, reinforcement
 						learning,
 						and
 						sim2real
-					</i></div>
+					</i>
+				</div>
 				<br>
 			</article>
 			<article class="box">
 				<div><strong>Texas Product Engineering Organization</strong></div>
 				<div>Active Participant<span style="float: right">Fall 2022 - Present</span></div>
-				<hr />
-				<div><i>
+				<div id="act2", style="display: none">
+					<hr />
+					<i>
 						Full-stack software development class to learn frontend and backend skills in HTML, CSS, JS,
 						APIs,
 						and
 						ReactJS
-					</i></div>
+					</i>
+				</div>
 				<br>
 			</article>
 			<article class="box">
 				<div><strong>Freshman Research Initiative</strong></div>
 				<div>Active Member<span style="float: right">Fall 2022 - Present</span></div>
-				<hr />
-				<div><i>
+				<div  id="act3", style="display: none">
+					<hr />
+					<i>
 						Selective program for freshman to research autonomous robots, big data, creative AI, quantum
 						computing,
 						and computational design
-					</i></div>
+					</i>
+				</div>
 				<br>
 			</article>
 		</div>
@@ -204,7 +223,7 @@
 				<div><strong>VEX VRC Robotics</strong></div>
 				<div>Team Leader, Engineer, and Coder<span style="float: right">Fall 2019 - Spring 2022</span></div>
 
-				<ul>
+				<ul  id="act4", style="display: none">
 					<li>
 						Implemented advanced functions, such as odometry and proportional-integral-derivative
 						controllers,
@@ -226,7 +245,7 @@
 				<div><strong>SystemsGo Rockets</strong></div>
 				<div>Team Leader, Engineer, and Coder<span style="float: right">Fall 2020 - Spring 2022</span></div>
 
-				<ul>
+				<ul  id="act5", style="display: none">
 					<li>
 						Coded flight control system in C++ with fail safes and sensor failure resiliency to break sound
 						barrier
@@ -250,12 +269,12 @@
 				</ul>
 			</article>
 		</div>
-		<div class = "subheader"><strong>
-				ADDITIONAL INFORMATION
-			</strong></div>
+		<div class="subheader">
+			ADDITIONAL INFORMATION
+		</div>
 		<hr />
 		<div class="section">
-			<div class="box">
+			<div class="box" , style="flex:2">
 				<strong>Computer Skills:</strong>
 				<br>
 				Java, C++, HTML, Software Development, Git, VisualStudio, IntelliJ, TwinCat, MS Excel, Word, PowerPoint

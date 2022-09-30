@@ -1,3 +1,7 @@
+body{
+    background-color:white;
+}
+
 main{
     font-size: 18px;
     align-items: center;
@@ -9,24 +13,25 @@ main{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .box{
     flex: 1;
-    height: 100%;
     margin: 5px;
     margin-top: 0px;
     margin-bottom: 15px;
     border-radius: 10px;
     padding: 10px;
-    background-color:lightgray;
+    background-color: lightgray;
 }
 
 h1{
-    font-size: 40px;
+    font-size: 44px;
+    font-weight: 1000;
 }
 
 .subheader{
     font-size: 22px;
+    font-weight: 1000;
 }
