@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+  * {
+    font-family: 'Lato', sans-serif;
+  }
+
+
+  h1 {
+    color: #000000;
+  }
+
+  .flex-container {
+    display: flex;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+  }
+
+  p { 
+    margin-bottom: -5px;
+    color: #242424;
+  }
+
+  #contact {
+    float:right;
+    margin-top: 15px;
+  }
+
+  #name {
+    width: 80%;
+    font-size: 28px;
+    letter-spacing: 7px;
+  }
+
+  #left {
+    width: 30%;
+  }
+
+  #info {
+    list-style: none;
+    width: 70%;
+  }
+
+  hr {
+    width: 93%;
+  }
