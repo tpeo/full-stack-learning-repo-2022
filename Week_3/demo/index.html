@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item" onkeyup="isDisabled()">
+      <button onclick="doSomething()" id="add-button" disabled>Add item</button>
+    </div>
+
+    <ul id="Shopping-List"">
+
+    </ul>
+
+    <script>
+        // Load the shopping list items
+        const localStorageList = localStorage.getItem("shoppingList")
+        if(localStorageList){
+            const deSerialize = JSON.parse(localStorageList)
+            console.log(deSerialize)
+            deSerialize.forEach(elem => {addItem(elem)})
+        }
+
+        function isDisabled(){
+            if(document.getElementById("item").value === ""){
+                document.getElementById("add-button").disabled = true
+            }
+            else{
+                document.getElementById("add-button").disabled = false
+            }
+        }
+        function addItem(text){
+            // Grab the list
+            const ul = document.querySelector("ul")
+
+            // Create new elements
+            const li = document.createElement("li")
+            const span = document.createElement("span")
+            const button = document.createElement("button")
+            const saveButton = document.createElement("button")
+            button.innerText = "Delete"
+            saveButton.innerText = "Save"
+            span.innerText = text
+
+            ul.appendChild(li)
+            li.appendChild(span)
+            li.appendChild(button)
+            li.appendChild(saveButton)
+            
+            // Set the delete option for this list item 
+            button.addEventListener('click', ()=>{
+                const currentList = localStorage.getItem("shoppingList")
+                if (currentList && JSON.parse(currentList).includes(text)){
+                    const newList = JSON.parse(currentList).filter(word => word !== text) 
+                    localStorage.setItem("shoppingList", JSON.stringify(newList))
+                }
+                ul.removeChild(li)
+            })
+
+            saveButton.addEventListener('click', ()=>{
+                const currentList = localStorage.getItem("shoppingList")
+                // First time
+                if (!currentList){
+                    localStorage.setItem("shoppingList",JSON.stringify([span.innerHTML]))
+                }
+                else{
+                    let deSerialized = JSON.parse(currentList)
+                    deSerialized.push(span.innerHTML)
+                    let serialized = JSON.stringify(deSerialized)
+                    localStorage.setItem("shoppingList",serialized)
+                }
+            })
+        }
+        function doSomething(){
+            const text = document.getElementById("item")
+            if (!text.value){
+                // This should never happen because of our checks, but keep it just in case
+                alert("Empty Field")
+            }
+            else{
+                addItem(text.value) 
+                text.value = ""
+                // Persistent State
+                const currentList = localStorage.getItem("shoppingList")
+
+                // After you click the button, lets foucs the text input to the 
+                text.focus()
+            }
+        }
+    </script>
+  </body>
+</html>
