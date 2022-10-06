@@ -12,7 +12,7 @@
 		<h4 id='lat'></h4>
 		<h4 id='lon'></h4>
 		<h4 id='aqi'></h4>
-		<button id='getAQI' onclick="getData()">Get AQI</button>
+		<button id='getAQI' onclick="getData()">Get AQI Jaco CR</button>
 	</div>
 </body>
 
@@ -24,7 +24,16 @@
 		let lon;
 
 		function getData() {
-            let apiCall = ``;
+			let apiCall = ``;
+				// calls the API
+				fetch()
+					.then((response) => 
+						// after recieving a response, take the response from the server and convert it to JSON 
+						response
+					)
+					.then((data) => {
+						
+					});
             
 			
 		}
