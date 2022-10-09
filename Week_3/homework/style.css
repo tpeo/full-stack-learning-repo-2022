@@ -7,6 +7,7 @@
     height: 100vh;
     width: 100%;
     margin: 0;
+    min-width: 880px;
     display: flex;
     font-family: sans-serif;
     box-sizing: border-box;
