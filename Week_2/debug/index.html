@@ -5,10 +5,10 @@
       body {
         background-color: powderblue;
       }
-      input.text {
+      input {
         color: orange;
       }
-      button.hover {
+      button:hover {
         color: blue;
       }
     </style>
@@ -17,10 +17,11 @@
     <form>
       <input type="text" id="number" value="0" />
     </form>
-    <button onclick="() => incrementValue()">Increase</button>
+    <button onclick="incrementValue()">Increase</button>
     <script>
       function incrementValue() {
         var value = parseInt(document.getElementById("number").value);
+        value = isNaN(value) ? 0 : value ;
         value++;
         document.getElementById("number").value = value;
       }
