@@ -200,7 +200,7 @@
 				date.innerText = time + "\n" + months[d.getMonth()] + " " + d.getDate();
 				let img = document.createElement("img");
 				img.src = "icons/" + dayData.weather[0].icon + ".svg";
-				img.style = "height: 75px; width: 100%;"
+				img.style = "height: 75px; width: 100%;";
 				let temp = document.createElement("h3");
 				let min = Math.trunc(dayData.main.temp_min);
 				let max = Math.trunc(dayData.main.temp_max);
