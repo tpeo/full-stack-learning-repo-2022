@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Weather Complete</title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div id='main-container'>
+		<div id='weather-container'>
+		</div>
+	</div>
+	<div id='side-container'>
+		<div>
+			<input id='search-input' placeholder='search for a city'></input>
+			<button id='search-button' onclick="search()">search</button>
+		</div>
+		<ul id='search-results-list'></ul>
+	</div>
+</body>
+
+<script>
+	// USE YOUR OWN API KEY
+	const apiKey = "8df56f673f0e663f365888c9eb52029f";
+	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+	// function that accepts that a number N and returns the name of the day and the date N days from now as a string
+	function formatDate(daysFromNow = 0) {
+		let output = ''
+		var date = new Date();
+		date.setDate(date.getDate() + daysFromNow);
+		output += date.toLocaleString('en-US', { weekday: 'long' }).toUpperCase()
+		output += ' ' + date.getDate()
+		return output
+	}
+
+	// function that uses OpenWeatherMap's geocoding API to find locations
+	function search() {
+		// takes the value from the search input
+		let searchInput = document.querySelector("#search-input").value;
+		if (searchInput) {
+			// creates the API call with the value from the search input as a query
+			let apiCall = `https://api.openweathermap.org/geo/1.0/direct?q=${searchInput},,US&limit=5&appid=${apiKey}`;
+			// calls the API
+			fetch(apiCall)
+				.then((response) =>
+					// after recieving a response, take the response from the server and convert it to JSON 
+					response.json()
+				)
+				.then((data) => {
+					// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
+
+					renderSearchResults(data)
+				});
+		}
+	}
+
+	// function that renders the search results as a unordered list
+	function renderSearchResults(searchResults) {
+		// selects the unordered list element search-results-list
+		const ul = document.querySelector('#search-results-list')
+		// shows the unordered list if was hidden previously
+		ul.classList.remove("hidden");
+		// clears out any list items from the previous search
+		ul.innerHTML = ''
+		// loops through each search result and creates and attaches a list item for the unordered list
+		searchResults.forEach((searchResult, index) => {
+			// creates a new unordered list element
+			const li = document.createElement('li')
+			// sets the list item's class as search-result
+			li.setAttribute('class', 'search-result')
+			// sets the text inside the list item as the name and state of the city 
+			const fullName = searchResult.name + ', ' + searchResult.state
+			li.innerHTML = fullName
+			// if the list item of a city is clicked, call the selectCity() function
+			li.addEventListener('click', () => selectCity(fullName, searchResult.name, searchResult.state, searchResult.lat, searchResult.lon))
+			// attaches the list item elements to search-results-list
+			ul.appendChild(li)
+		})
+	}
+
+	// function that is called whenever a city has been selected
+	function selectCity(fullName, name, state, lat, lon) {
+		// hides the search-results-list since it is not needed right now
+		document.querySelector('#search-results-list').className = 'hidden'
+		// sets the global city variable
+		document.querySelector("#search-input").value = ''
+		city = {
+			fullName: fullName,
+			name: name,
+			state: state,
+			lat: lat,
+			lon: lon
+		}
+		console.log(city.lat + ", " + city.lon);
+		let apiCall = "https://api.openweathermap.org/data/2.5/weather?lat=" + city.lat + "&lon=" + city.lon + "&appid=" + apiKey + "&units=imperial";
+		// calls the API
+		fetch(apiCall)
+			.then((response) =>
+				// after recieving a response, take the response from the server and convert it to JSON 
+				response.json()
+			)
+			.then((data) => {
+				// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
+				let currentWeather = data;
+
+				let apiCall = "https://api.openweathermap.org/data/2.5/air_pollution?lat=" + city.lat + "&lon=" + city.lon + "&appid=" + apiKey;
+				// calls the API
+				fetch(apiCall)
+					.then((response) =>
+						// after recieving a response, take the response from the server and convert it to JSON 
+						response.json()
+					)
+					.then((data) => {
+						// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
+						let polution = data;
+
+						let apiCall = "https://api.openweathermap.org/data/2.5/forecast?lat=" + city.lat + "&lon=" + city.lon + "&appid=" + apiKey + "&units=imperial";
+						// calls the API
+						fetch(apiCall)
+							.then((response) =>
+								// after recieving a response, take the response from the server and convert it to JSON 
+								response.json()
+							)
+							.then((data) => {
+								// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
+								let forcast = data;
+								renderWeather(city, currentWeather, polution, forcast);
+							});
+					});
+			});
+
+
+
+		function renderWeather(city, currentWeather, polution, forcast) {
+			let weatherBox = document.getElementById("weather-container");
+			weatherBox.innerHTML = "";
+
+
+			let titleBox = document.createElement("div");
+			titleBox.className = "weatherSection";
+
+			let date = document.createElement("h3");
+			const d = new Date();
+			date.innerText = months[d.getMonth()] + " " + d.getDate();
+			let title = document.createElement("h2");
+			title.innerText = "Weather for " + city.name + ", " + city.state;
+			titleBox.appendChild(date);
+			titleBox.appendChild(title);
+
+			let currentConditionsBox = document.createElement("div");
+			currentConditionsBox.style = "display:flex; flex-direction:row"
+			currentConditionsBox.className = "weatherSection";
+
+			let currentConditionsTextBex = document.createElement("div");
+
+			let cond = document.createElement("h3");
+			cond.innerText = currentWeather.weather[0].main;
+			let temp = document.createElement("h1");
+			temp.innerText = Math.trunc(currentWeather.main.temp) + "\u00B0";
+			let aqi = document.createElement("h3");
+			aqi.innerText = "AQI: " + polution.list[0].main.aqi;
+			currentConditionsTextBex.appendChild(cond);
+			currentConditionsTextBex.appendChild(temp);
+			currentConditionsTextBex.appendChild(aqi);
+
+
+			let currentConditionsImageBox = document.createElement("div");
+			let currentConditionsImage = document.createElement("img");
+			currentConditionsImage.src = "icons/" + currentWeather.weather[0].icon + ".svg";
+			currentConditionsImage.style = "height: 125px; width: 150px";
+			currentConditionsImageBox.appendChild(currentConditionsImage);
+
+			currentConditionsBox.appendChild(currentConditionsTextBex);
+			currentConditionsBox.appendChild(currentConditionsImageBox);
+
+			let dailyBox = document.createElement("div");
+			dailyBox.style = "display:flex; flex-direction:row; justify-content:space-between; width:100%";
+			dailyBox.className = "weatherSection";
+			console.log(forcast.city.name);
+			console.log(forcast.city.coord);
+			console.log(forcast.list);
+
+			for (let i = 0; i < 5; i++) {
+				let dayData = forcast.list[i];
+				let day = document.createElement("div");
+				day.className = "day"
+				if (i === 0) {
+					day.style = "margin-left:0px"
+				}
+				if (i === 5) {
+					day.style = "margin-right:0px"
+				}
+				let date = document.createElement("h3");
+				let d = new Date(dayData.dt * 1000);
+				let time = "" + ((d.getHours() - 1) % 12 + 1);
+				time = time + (d.getHours() > 12 ? " pm" : " am");
+				date.innerText = time + "\n" + months[d.getMonth()] + " " + d.getDate();
+				let img = document.createElement("img");
+				img.src = "icons/" + dayData.weather[0].icon + ".svg";
+				img.style = "height: 75px; width: 100%;";
+				let temp = document.createElement("h3");
+				let min = Math.trunc(dayData.main.temp_min);
+				let max = Math.trunc(dayData.main.temp_max);
+				temp.innerText = min + "\u00B0 to " + max + "\u00B0";
+				day.appendChild(date);
+				day.appendChild(img);
+				day.appendChild(temp);
+
+				dailyBox.appendChild(day);
+			}
+
+			weatherBox.appendChild(titleBox);
+			weatherBox.appendChild(currentConditionsBox);
+			weatherBox.appendChild(dailyBox);
+		}
+	}
+</script>
+
+</html>
