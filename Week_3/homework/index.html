@@ -26,6 +26,12 @@
 	const apiKey = "8df56f673f0e663f365888c9eb52029f";
 	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
+	document.querySelector("body").addEventListener('keypress', function (e) {
+		if (e.key === 'Enter') {
+			search();
+		}
+	});
+
 	// function that accepts that a number N and returns the name of the day and the date N days from now as a string
 	function formatDate(daysFromNow = 0) {
 		let output = ''
@@ -76,6 +82,7 @@
 			li.innerHTML = fullName
 			// if the list item of a city is clicked, call the selectCity() function
 			li.addEventListener('click', () => selectCity(fullName, searchResult.name, searchResult.state, searchResult.lat, searchResult.lon))
+			
 			// attaches the list item elements to search-results-list
 			ul.appendChild(li)
 		})
@@ -87,6 +94,9 @@
 		document.querySelector('#search-results-list').className = 'hidden'
 		// sets the global city variable
 		document.querySelector("#search-input").value = ''
+		
+		let weatherBox = document.getElementById("weather-container");
+		weatherBox.innerHTML = "";
 		city = {
 			fullName: fullName,
 			name: name,
@@ -136,7 +146,6 @@
 
 		function renderWeather(city, currentWeather, polution, forcast) {
 			let weatherBox = document.getElementById("weather-container");
-			weatherBox.innerHTML = "";
 
 
 			let titleBox = document.createElement("div");
@@ -183,7 +192,7 @@
 			console.log(forcast.city.coord);
 			console.log(forcast.list);
 
-			for (let i = 0; i < 5; i++) {
+			for (let i = 0; i < forcast.list.length; i++) {
 				let dayData = forcast.list[i];
 				let day = document.createElement("div");
 				day.className = "day"
@@ -195,15 +204,25 @@
 				}
 				let date = document.createElement("h3");
 				let d = new Date(dayData.dt * 1000);
-				let time = "" + ((d.getHours() - 1) % 12 + 1);
-				time = time + (d.getHours() > 12 ? " pm" : " am");
-				date.innerText = time + "\n" + months[d.getMonth()] + " " + d.getDate();
+				//let time = "" + ((d.getHours() - 1) % 12 + 1);
+				//time = time + (d.getHours() > 12 ? " pm" : " am");
+				date.innerText = months[d.getMonth()] + " " + d.getDate();
+				let min = Number.MAX_VALUE;
+				let max = Number.MIN_VALUE;
 				let img = document.createElement("img");
 				img.src = "icons/" + dayData.weather[0].icon + ".svg";
 				img.style = "height: 75px; width: 100%;";
 				let temp = document.createElement("h3");
-				let min = Math.trunc(dayData.main.temp_min);
-				let max = Math.trunc(dayData.main.temp_max);
+				for (; (new Date(dayData.dt * 1000)).getDate() === d.getDate() && i < forcast.list.length; i++) {
+					d = new Date(dayData.dt * 1000);
+					min = Math.min(min, Math.trunc(dayData.main.temp_min));
+					max = Math.max(max, Math.trunc(dayData.main.temp_max));
+					if (d.getHours() >= 11 && d.getHours() <= 13) {
+						img.src = "icons/" + dayData.weather[0].icon + ".svg";
+					}
+					dayData = forcast.list[i];
+				}
+
 				temp.innerText = min + "\u00B0 to " + max + "\u00B0";
 				day.appendChild(date);
 				day.appendChild(img);
