@@ -91,6 +91,8 @@
 
 		// function that is called whenever a city has been selected
 		function selectCity(fullName, name, state, lat, lon) {
+			document.getElementById("weather-container").innerHTML = "";
+
 			// hides the search-results-list since it is not needed right now
 			document.querySelector('#search-results-list').className = 'hidden'
 			// sets the global city variable
@@ -102,9 +104,10 @@
 				lat: lat,
 				lon: lon
 			}
+
             // BEGIN CODING HERE
 			// alert(city.fullName);
-
+			
 			let apiCall = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&cnt=5&appid=${apiKey}`;
 				fetch(apiCall)
 					.then((response) => 
@@ -134,8 +137,13 @@
 			const weatherContainer = document.getElementById("weather-container");
 			weatherContainer.innerHTML += '<h3>' + formatDate() + '<h3>';
 			weatherContainer.innerHTML += '<h1>' + 'Weather for ' + data['name'] + '<h1>';
-			weatherContainer.innerHTML += '<div class="curWeatherContent"> '
-			weatherContainer.innerHTML += '<h2>' + data['main']['temp'] + "°C<h2>";
+			
+			const weatherContent = document.createElement("div");
+			weatherContent.setAttribute("class", "curWeatherContent");
+			weatherContent.innerHTML += '<h2>' + data['weather']['0']['main'];
+			weatherContent.innerHTML += '<h2>' + data['main']['temp'] + "°C";
+			weatherContainer.append(weatherContent);
+
 			const curWeatherImg = new Image(10, 10); // width, height
 			curWeatherImg.setAttribute("id", "curWeatherImg");
 			curWeatherImg.src = "icons/" + data['weather']['0']['icon'] + ".svg";
@@ -144,8 +152,8 @@
 
 		function displayCurrentAirQual(data) {
 			console.log(data);
-			const weatherContainer = document.getElementById("weather-container");
-			weatherContainer.innerHTML += '<h2>AQI: ' + data['list']['0']['main']['aqi'] + '<h2>';
+			const weatherContainer = document.getElementsByClassName("curWeatherContent");
+			weatherContainer[0].innerHTML += '<p>AQI: ' + data['list']['0']['main']['aqi'];
 		}
 	</script>
 </html>
