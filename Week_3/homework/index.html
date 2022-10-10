@@ -14,7 +14,7 @@
 	</div>
 	<div id='side-container'>
 		<div>
-			<input id='search-input' placeholder='search for a city'></input>
+			<input id='search-input' placeholder='search for a city' onkeypress></input>
 			<button id='search-button' onclick="search()">search</button>
 		</div>
 		<ul id='search-results-list'></ul>
@@ -33,6 +33,19 @@
 		let weather;
         // the variable that stores the air quality index for the city
 		let aqi;
+
+		var input = document.getElementById("search-input");
+
+		// Execute a function when the user presses a key on the keyboard
+		input.addEventListener("keypress", function(event) {
+		// If the user presses the "Enter" key on the keyboard
+		if (event.key === "Enter") {
+			// Cancel the default action, if needed
+			event.preventDefault();
+			// Trigger the button element with a click
+			document.getElementById("search-button").click();
+		}
+		});
 
 		// function that accepts that a number N and returns the name of the day and the date N days from now as a string
 		function formatDate(daysFromNow = 0) {
@@ -129,14 +142,14 @@
 						// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
 						displayCurrentAirQual(data)
 					});
-			
 		}
 
 		function displayCurrentWeather(data) {
 			console.log(data);
 			const weatherContainer = document.getElementById("weather-container");
-			weatherContainer.innerHTML += '<h3>' + formatDate() + '<h3>';
-			weatherContainer.innerHTML += '<h1>' + 'Weather for ' + data['name'] + '<h1>';
+			weatherContainer.innerHTML += '<h3>' + formatDate();
+			weatherContainer.innerHTML += '<h1>' + 'Weather for ' + data['name'];
+			weatherContainer.innerHTML += '<br>';
 			
 			const weatherContent = document.createElement("div");
 			weatherContent.setAttribute("class", "curWeatherContent");
@@ -144,10 +157,13 @@
 			weatherContent.innerHTML += '<h2>' + data['main']['temp'] + "°C";
 			weatherContainer.append(weatherContent);
 
+			const weatherImageDiv = document.createElement("div");
+			weatherImageDiv.setAttribute("class", "curWeatherImg");
 			const curWeatherImg = new Image(10, 10); // width, height
 			curWeatherImg.setAttribute("id", "curWeatherImg");
 			curWeatherImg.src = "icons/" + data['weather']['0']['icon'] + ".svg";
-			weatherContainer.innerHTML += '<img src="' + curWeatherImg.src + '" id="' + curWeatherImg.id +'"/><br>';
+			weatherImageDiv.innerHTML += '<img src="' + curWeatherImg.src + '" id="' + curWeatherImg.id +'"/>';
+			weatherContainer.append(weatherImageDiv);
 		}
 
 		function displayCurrentAirQual(data) {
