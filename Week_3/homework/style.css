@@ -18,7 +18,7 @@
   }
   
   img[src] {
-    display: block;
+    display: inline-flex;
   }
   
   #main-container {
@@ -66,3 +66,12 @@
     cursor: pointer;
   }
   
+  #curWeatherImg {
+    height: 20%;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  #curWeatherContent {
+    width: 40%;
+  }

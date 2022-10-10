@@ -23,7 +23,9 @@
 
 <script>
 		// USE YOUR OWN API KEY
-		const apiKey = "";
+		const apiKey = "2d9899096ff8044a943bc3f52ec4818f";
+
+		const daysSearched = 5;
 
         // variable that stores the city that is chosen
 		let city;
@@ -49,6 +51,7 @@
 			if (searchInput) {
 				// creates the API call with the value from the search input as a query
 				let apiCall = `https://api.openweathermap.org/geo/1.0/direct?q=${searchInput},,US&limit=5&appid=${apiKey}`;
+				// let apiCall = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput},US&APPID=${apiKey}`;
 				// calls the API
 				fetch(apiCall)
 					.then((response) => 
@@ -100,6 +103,49 @@
 				lon: lon
 			}
             // BEGIN CODING HERE
+			// alert(city.fullName);
+
+			let apiCall = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&cnt=5&appid=${apiKey}`;
+				fetch(apiCall)
+					.then((response) => 
+						// after recieving a response, take the response from the server and convert it to JSON 
+						response.json()
+					)
+					.then((data) => {
+						// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
+						displayCurrentWeather(data)
+					});
+
+			apiCall = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+				fetch(apiCall)
+					.then((response) => 
+						// after recieving a response, take the response from the server and convert it to JSON 
+						response.json()
+					)
+					.then((data) => {
+						// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
+						displayCurrentAirQual(data)
+					});
+			
+		}
+
+		function displayCurrentWeather(data) {
+			console.log(data);
+			const weatherContainer = document.getElementById("weather-container");
+			weatherContainer.innerHTML += '<h3>' + formatDate() + '<h3>';
+			weatherContainer.innerHTML += '<h1>' + 'Weather for ' + data['name'] + '<h1>';
+			weatherContainer.innerHTML += '<div class="curWeatherContent"> '
+			weatherContainer.innerHTML += '<h2>' + data['main']['temp'] + "°C<h2>";
+			const curWeatherImg = new Image(10, 10); // width, height
+			curWeatherImg.setAttribute("id", "curWeatherImg");
+			curWeatherImg.src = "icons/" + data['weather']['0']['icon'] + ".svg";
+			weatherContainer.innerHTML += '<img src="' + curWeatherImg.src + '" id="' + curWeatherImg.id +'"/><br>';
+		}
+
+		function displayCurrentAirQual(data) {
+			console.log(data);
+			const weatherContainer = document.getElementById("weather-container");
+			weatherContainer.innerHTML += '<h2>AQI: ' + data['list']['0']['main']['aqi'] + '<h2>';
 		}
 	</script>
 </html>
