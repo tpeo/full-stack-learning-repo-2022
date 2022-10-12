@@ -130,18 +130,19 @@
 					.then((data) => {
 						// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
 						displayCurrentWeather(data)
+						apiCall = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+						fetch(apiCall)
+							.then((response) => 
+								// after recieving a response, take the response from the server and convert it to JSON 
+								response.json()
+							)
+							.then((data) => {
+								// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
+								displayCurrentAirQual(data)
+							});
 					});
 
-			apiCall = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-				fetch(apiCall)
-					.then((response) => 
-						// after recieving a response, take the response from the server and convert it to JSON 
-						response.json()
-					)
-					.then((data) => {
-						// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
-						displayCurrentAirQual(data)
-					});
+			
 		}
 
 		function displayCurrentWeather(data) {
