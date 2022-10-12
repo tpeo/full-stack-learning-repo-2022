@@ -1,0 +1,16 @@
+Weather in austin next 5 days, 3 hr intervals:
+http://api.openweathermap.org/data/2.5/forecast?lat=30.2711286&lon=-97.7436995&appid=482077a69851b3a52657d892f35a699b
+
+    With units and only 9 hrs: http://api.openweathermap.org/data/2.5/forecast?lat=30.2711286&lon=-97.7436995&appid=482077a69851b3a52657d892f35a699b&cnt=3
+
+Weather next 5 days:
+https://api.openweathermap.org/data/2.5/onecall?lat=30.2711286&lon=-97.7436995&exclude=current,minutely,hourly,alerts&appid=482077a69851b3a52657d892f35a699b
+
+Geocoding in Austin:
+http://api.openweathermap.org/geo/1.0/direct?q=Austin,TX,USA&limit=5&appid=482077a69851b3a52657d892f35a699b
+
+Geocoding Jaco CR:
+http://api.openweathermap.org/geo/1.0/direct?appid=482077a69851b3a52657d892f35a699b&q=Jaco,CR&limit=5
+
+Air pollution Jaco:
+http://api.openweathermap.org/data/2.5/air_pollution?lat=9.6161929&lon=-84.6307028&appid=482077a69851b3a52657d892f35a699b
