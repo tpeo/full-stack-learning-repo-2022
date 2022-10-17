@@ -139,10 +139,16 @@
 							.then((data) => {
 								// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
 								displayCurrentAirQual(data)
+								apiCall = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+								fetch(apiCall)
+									.then((response) =>
+										response.json()
+									)
+									.then((data)=>
+										displayFutureWeather(data)
+								);
 							});
 					});
-
-			
 		}
 
 		function displayCurrentWeather(data) {
@@ -171,6 +177,23 @@
 			console.log(data);
 			const weatherContainer = document.getElementsByClassName("curWeatherContent");
 			weatherContainer[0].innerHTML += '<p>AQI: ' + data['list']['0']['main']['aqi'];
+		}
+
+		function displayFutureWeather(data) {
+			console.log(data);
+			const weatherForecastBlock = document.createElement("div");
+			weatherForecastBlock.setAttribute("class", "weatherForecastBlock");
+			document.getElementById('weather-container').innerHTML += "<br>";
+			document.getElementById('weather-container').appendChild(weatherForecastBlock);
+			for(i = 1; i <= 5; i++) {
+				const weatherForecast = document.createElement("div");
+				weatherForecast.setAttribute("class", "weatherForecast");
+				weatherForecast.innerHTML += "<h4 text-align: center>" + formatDate();
+				weatherForecast.innerHTML += "<h2 text-align: center>" + data['list'][i*8-1]['main']['temp'];
+
+				document.getElementsByClassName('weatherForecastBlock')[0].appendChild(weatherForecast);
+				document.getElementsByClassName('weatherForecastBlock')[0].innerHTML += "<br>";
+			}
 		}
 	</script>
 </html>

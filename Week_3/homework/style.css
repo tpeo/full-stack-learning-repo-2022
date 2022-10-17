@@ -76,3 +76,20 @@
     float: left;
     width: 25%;
   }
+
+  /*
+  #weatherForecastBlock {
+    display:flex;
+    align-items: flex-end;
+    justify-content: space-around;
+  }
+  */
+
+  .weatherForecast {
+    width: 13%;
+    aspect-ratio: 1/1;
+    min-height: 70px;
+    min-width: 70px;
+    float: left;
+    background-color: #ffffff;
+  }
