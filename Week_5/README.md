@@ -6,7 +6,7 @@ We are going to finish off the frontend section of our course by exploring how t
 
 [Day 9: Modern React and Using UI Libraries](https://docs.google.com/presentation/d/12pDClMCPLL9ACW6-LJJjns93Hb8JeUYaWaelsSbQcFY/edit#slide=id.gfdad69bcc6_1_64)
 
-[React Todo List with Login Demo](https://codesandbox.io/s/to-do-mantine-complete-6wlh60?file=/src/pages/HomePage.js)
+[React Todo List with Login Demo](https://codesandbox.io/s/to-do-mantine-complete-forked-bz9lx3?file=/src/App.js)
 
 # Demo
 
