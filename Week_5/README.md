@@ -16,7 +16,7 @@ We will go over how to structure a React application, along with how to use the 
 
 For this week's homework, y'all will be building on top of the Demo Todo application by integrating it with a sample backend that we have created. We've included the code for the backend, and you do not need to know the ins and outs, just how to use it. The following is documentation of the API that we've created, along with the endpoints.
 
-Backend API URL: <insert_url_here>
+Backend API URL: https://tpeo-todo.herokuapp.com/
 
 **API Documentation**:
 
@@ -49,6 +49,7 @@ GET: /todo <- Gets the TODO list for a user
   - todos: [Objects] <- each object will look like the following
     - todo: string
     - id: id of the todo
+    - email: email of user who created the todo
 
 POST: /todo <- creates a TODO item for a user
 
@@ -57,8 +58,8 @@ POST: /todo <- creates a TODO item for a user
   - todo: string
 
 - Response -- JSON
-  - username: string
-  - todos: [string]
+  - msg: string <- should be sucess
+  - uid: string <-id of created todo item
 
 DELTE: /todo/<id> <- deletes a todo from a user's list if it exists
 
