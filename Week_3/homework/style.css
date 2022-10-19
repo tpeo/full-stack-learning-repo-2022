@@ -77,19 +77,25 @@
     width: 25%;
   }
 
-  /*
-  #weatherForecastBlock {
-    display:flex;
-    align-items: flex-end;
-    justify-content: space-around;
+  
+  .weatherForecastBlock {
+    display: block;
+    clear: both;
   }
-  */
+  
 
   .weatherForecast {
-    width: 13%;
+    width: 15%;
     aspect-ratio: 1/1;
+    margin: 10px;
     min-height: 70px;
     min-width: 70px;
     float: left;
     background-color: #ffffff;
   }
+
+  
+  .forecastImage {
+    width: 50%;
+  }
+  

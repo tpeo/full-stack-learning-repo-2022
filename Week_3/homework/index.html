@@ -187,12 +187,14 @@
 			document.getElementById('weather-container').appendChild(weatherForecastBlock);
 			for(i = 1; i <= 5; i++) {
 				const weatherForecast = document.createElement("div");
+				let r = 8 * i - 1;
 				weatherForecast.setAttribute("class", "weatherForecast");
-				weatherForecast.innerHTML += "<h4 text-align: center>" + formatDate();
-				weatherForecast.innerHTML += "<h2 text-align: center>" + data['list'][i*8-1]['main']['temp'];
+				weatherForecast.innerHTML += "<h4 text-align: center>" + formatDate(i);
+				weatherForecast.innerHTML += "<h2 text-align: center>" + data['list'][r]['main']['temp'] + "°C";
+				weatherForecast.innerHTML += "<img class=\"forecastImage\" src='icons/" + data['list'][r]['weather']['0']['icon']+ ".svg'>";
 
 				document.getElementsByClassName('weatherForecastBlock')[0].appendChild(weatherForecast);
-				document.getElementsByClassName('weatherForecastBlock')[0].innerHTML += "<br>";
+				//document.getElementsByClassName('weatherForecastBlock')[0].innerHTML += "<br>";
 			}
 		}
 	</script>
