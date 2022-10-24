@@ -64,6 +64,7 @@ POST: /todo <- creates a TODO item for a user
 DELTE: /todo/<id> <- deletes a todo from a user's list if it exists
 
 - Request
+    - uid: string <- the id of the todo you want to remove
 - Response -- JSON
   - msg: string <- should be success
 
