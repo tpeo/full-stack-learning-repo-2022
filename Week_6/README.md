@@ -20,7 +20,7 @@ We will expect you to have a firebase account so you can do your homework this w
 
 # Demo
 
-We will go over how to debug a NodeJS server in Visual Studio Code, how to connect to a firebase database, and
+We will go over how to connect to Firebase and use cloud firestore to model a Twitter like application, demonstrating how document databases handle one-one, one-many, many-many relationships.
 
 # Homework
 
