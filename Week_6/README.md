@@ -16,10 +16,9 @@ We will expect you to have a firebase account so you can do your homework this w
 
 1. Go to firebase.com and sign up with a personal account
 2. Create a project
-* Click On: get started
-* Click On: add Project
-* Name project
-* Click On: Add web app
+* Click On: Get Started
+* Click On: Add Project
+* Name the project
 
 3. To use Google Authentication and other Firebase utilities
 * Go to Project settings (gear at top left) and under "Your apps" add a web app (</>)
@@ -46,7 +45,7 @@ const app = initializeApp(firebaseConfig);
 ```
 
 * npm install firebase in your frontend
-* Copy over the js code into a firebase.js file preferably located in frontend/src/components/Firebase/firebase.js (you may need to create directories). This will be used to initialize Firebase on the frontend to facilitate Google Authentication, etc later.
+* Copy over the js code given into a firebase.js file preferably located in frontend/src/components/Firebase/firebase.js (you may need to create directories). This will be used to initialize Firebase on the frontend to facilitate Google Authentication, etc.
 
 4. For Firebase Backend Database
 * npm install firebase in your backend
@@ -63,7 +62,7 @@ firebase.initializeApp({
 module.exports = firebase;
 ```
 * Create the cred.json, in backend/firebase/cred.json. This json can be found through project settings (gear on top left) > service accounts > manage service account permissions > three dots next to firebase-adminsdk-... > manage keys > add key > create new key > json, and then copy over the json that is given into the cred.json file
-* This cred.json is used by the cred.js file to establish your credentials as an administrator who can interact with Firebase database for your particular project. Do not share this with anyone you don't trust, and add \*\*/cred.json to your .gitignore
+* This cred.json is used by the cred.js file to establish your credentials as an administrator who can interact with the Firebase database for your particular project. Do not share this json with anyone you don't trust, and be sure to add \*\*/cred.json to your .gitignore
 
 
 # Demo
