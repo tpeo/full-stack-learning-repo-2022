@@ -14,8 +14,7 @@ Note: if you haven't already, make sure you have NodeJS and npm installed, you c
 
 We will expect you to have a firebase account so you can do your homework this week. To get started with firebase, observe the following steps:
 
-1. Go to firebase.com
-  i. Sign up with a personal account
+1. Go to firebase.com and sign up with a personal account
 2. Create a project
 * Click On: get started
 * Click On: add Project
@@ -47,7 +46,7 @@ const app = initializeApp(firebaseConfig);
 ```
 
 * npm install firebase in your frontend
-* Copy over the js code into a firebase.js file preferably located by frontend/src/components/Firebase/firebase.js (you may need to create directories). This will be used to initialize Firebase on the frontend to facilitate Google Authentication, etc later.
+* Copy over the js code into a firebase.js file preferably located in frontend/src/components/Firebase/firebase.js (you may need to create directories). This will be used to initialize Firebase on the frontend to facilitate Google Authentication, etc later.
 
 4. For Firebase Backend Database
 * npm install firebase in your backend
