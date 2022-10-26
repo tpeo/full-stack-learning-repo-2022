@@ -17,14 +17,14 @@ We will expect you to have a firebase account so you can do your homework this w
 1. Go to firebase.com
   i. Sign up with a personal account
 2. Create a project
-  i.   Click On: get started
-  ii.  Click On: add Project
-  iii. Name project
-  iv.  Click On: Add web app
+* Click On: get started
+* Click On: add Project
+* Name project
+* Click On: Add web app
 
 3. To use Google Authentication and other Firebase utilities
-  i.   Go to Project settings (gear at top left) and under "Your apps" add a web app (</>)
-  ii.  This will give you code which looks like this
+* Go to Project settings (gear at top left) and under "Your apps" add a web app (</>)
+* This will give you code which looks like this
   
 ```
 // Import the functions you need from the SDKs you need
@@ -46,12 +46,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 ```
 
-  iii. npm install firebase in your frontend
-  iv.  Copy over the js code into a firebase.js file preferably located by frontend/src/components/Firebase/firebase.js (you may need to create directories). This will be used to initialize Firebase on the frontend to facilitate Google Authentication, etc later.
+* npm install firebase in your frontend
+* Copy over the js code into a firebase.js file preferably located by frontend/src/components/Firebase/firebase.js (you may need to create directories). This will be used to initialize Firebase on the frontend to facilitate Google Authentication, etc later.
 
 4. For Firebase Backend Database
-  i.   npm install firebase in your backend
-  ii.  Copy over the following code (this code can also be found in project settings, the gear on the top left > service accounts > Firebase Admin SDK) into backend/firebase/cred.js (you may need to create directories)
+* npm install firebase in your backend
+* Copy over the following code (this code can also be found in project settings, the gear on the top left > service accounts > Firebase Admin SDK) into backend/firebase/cred.js (you may need to create directories)
   
 ```
 const firebase = require("firebase-admin");
@@ -63,8 +63,8 @@ firebase.initializeApp({
 
 module.exports = firebase;
 ```
-  iii. Create the cred.json, in backend/firebase/cred.json. This json can be found through project settings (gear on top left) > service accounts > manage service account permissions > three dots next to firebase-adminsdk-... > manage keys > add key > create new key > json, and then copy over the json that is given into the cred.json file
-  iv.  This cred.json is used by the cred.js file to establish your credentials as an administrator who can interact with Firebase database for your particular project. Do not share this with anyone you don't trust, and add **/cred.json to your .gitignore
+* Create the cred.json, in backend/firebase/cred.json. This json can be found through project settings (gear on top left) > service accounts > manage service account permissions > three dots next to firebase-adminsdk-... > manage keys > add key > create new key > json, and then copy over the json that is given into the cred.json file
+* This cred.json is used by the cred.js file to establish your credentials as an administrator who can interact with Firebase database for your particular project. Do not share this with anyone you don't trust, and add \*\*/cred.json to your .gitignore
 
 
 # Demo
