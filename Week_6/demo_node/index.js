@@ -9,8 +9,10 @@ const dotenv = require("dotenv").config();
 app.use("/users", require("./routes/users.js"));
 
 app.get("/", (req, res) => {
-  res.status(201).json({ hello: "HELLO WORLD" });
+  res.status(200).json({ hello: "HELLO WORLD" });
 });
 
+const PORT = process.env.PORT_LISTENING;
+
 // TODO: we are currently listening to port 3000, lets define an environment variable and use that instead
-app.listen(3000, () => console.log("App listening on port 3000"));
+app.listen(parseInt(PORT), () => console.log("App listening on port " + PORT));

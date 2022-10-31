@@ -24,6 +24,7 @@ function validateSchema(obj) {
 
 function handleErrors(err, req, res, next) {
   //TODO: write an error handler that logs out the message of the error and returns it to the user
+  res.status(400).json(err);
 }
 
 module.exports = { validateSchema, handleErrors };
