@@ -1,0 +1,18 @@
+{
+  "name": "passwords_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "password": "node password.js",
+    "auth": "node auth.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "firebase-admin": "^11.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "pbkdf2": "^3.1.2"
+  }
+}
