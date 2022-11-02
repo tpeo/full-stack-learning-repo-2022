@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Weather APIs</title>
+	<meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div id='main-container'>
+		<h4 id='lat'></h4>
+		<h4 id='lon'></h4>
+		<h4 id='aqi'></h4>
+		<button id='getAQI' onclick="getData()">Get AQI Jaco CR</button>
+	</div>
+</body>
+
+<script>
+		const apiKey = "482077a69851b3a52657d892f35a699b";
+
+		let aqi;
+		let lat;
+		let lon;
+
+		function getData() {
+			let apiCall = `http://api.openweathermap.org/geo/1.0/direct?appid=${apiKey}&q=Jaco,CR&limit=5`;
+				// calls the API
+				fetch(apiCall)
+					.then((response) => 
+						// after recieving a response, take the response from the server and convert it to JSON 
+						response.json()
+					)
+					.then((data) => {
+						console.log(data);
+						lat = data[0].lat;
+						lon = data[0].lon;
+						console.log(lat,lon)
+						renderLatLon()
+					}
+					);
+            
+			
+		}
+
+		function renderLatLon() {
+			document.querySelector('#lat').innerText = 'Lat: ' + lat;
+		}
+
+		function getAQI() {
+			
+		}
+
+        
+		function renderAQI() {
+			
+		}
+	</script>
+</html>
