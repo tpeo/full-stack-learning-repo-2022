@@ -1,0 +1,17 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "Self-built to-do API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zhuoli Xie",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "firebase": "^9.13.0",
+    "firebase-admin": "^11.2.0"
+  }
+}
