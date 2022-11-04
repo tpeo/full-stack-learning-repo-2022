@@ -10,6 +10,9 @@
 <body>
 	<div id='main-container'>
 		<div id='weather-container'>
+			<h4 id="city"></h4>
+			<h4 id="temp"></h4>
+			<h4 id="weather"></h4>
 		</div> 
 	</div>
 	<div id='side-container'>
@@ -17,13 +20,13 @@
 			<input id='search-input' placeholder='search for a city'></input>
 			<button id='search-button' onclick="search()">search</button>
 		</div>
-		<ul id='search-results-list'></ul>
+		<ul id='search-results-list' onclick="displaySearchResults()"></ul>
 	</div>
 </body>
 
 <script>
 		// USE YOUR OWN API KEY
-		const apiKey = "";
+		const apiKey = "234aacb7bdf7cb46af87e93714813a0e";
 
         // variable that stores the city that is chosen
 		let city;
@@ -100,6 +103,51 @@
 				lon: lon
 			}
             // BEGIN CODING HERE
+			let apiCall = `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}`;		
+			fetch(apiCall)
+				.then((response) => 
+					// after recieving a response, take the response from the server and convert it to JSON 
+					response.json()
+				)
+				.then((data) => {
+					// after recieving the converted JSON data, pass the JSON to the renderSearchResults() function
+					console.log(data);
+					console.log(data.city)
+					console.log(data.city["name"])
+					console.log(data.list["0"]["main"]["temp"])
+					city = data.city["name"];
+					temp = data.list["0"]["main"]["temp"];
+					weather = data.list["0"]["weather"]["0"]["main"];
+					console.log(city, temp,weather)
+					displaySearchResults(city, temp, weather)
+				});
 		}
+
+		function displaySearchResults(city, temp, weather) {
+			document.querySelector('#city').innerText = 'City: ' + city;
+			document.querySelector('#temp').innerText = 'Temperature: ' + temp;
+			document.querySelector('#weather').innerText = 'Weather: ' + weather;
+			/*
+			const ul = document.querySelector('#search-results-weather')
+			ul.innerHTML = ''
+			console.log(searchResults);
+			weather = {
+				date: searchResults[list]["dt_txt"],
+				temp: searchResults["list"]["main"]["temp"],
+				forecast: searchResults["list"]["weather"]["main"]
+			}
+			searchResults.forEach((searchResult, index) => {
+					// creates a new unordered list element
+					const li = document.createElement('li')
+					// sets the list item's class as search-result
+					li.setAttribute('class', 'search-result')
+					// sets the text inside the list item as the name and state of the city 
+					const fullName = searchResult.date + "\n" + searchResult.temp + "\n" + searchResult.forecast 
+					li.innerHTML = fullName
+			});
+			*/
+		}
+				
+		
 	</script>
 </html>

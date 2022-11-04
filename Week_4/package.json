@@ -1,0 +1,15 @@
+{
+  "name": "week_4",
+  "version": "1.0.0",
+  "description": "This week, we continue our progress in frontend web development with React. React is a powerful and relatively lightweight framework used to rapidly build out HTML,CSS, and Javascript user interfaces. Although it is widely used, it often has a steep learning curve which is why we're dedicating the next two weeks to flesh out the topic. Additionally, we will also briefly touch upon NodeJS and its package manager `npm` since its involved when developing React.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "react-bootstrap": "^2.5.0"
+  }
+}

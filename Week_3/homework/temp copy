@@ -1,0 +1,239 @@
+///////////////////// AuthContent
+
+// based on the tutorial from https://usehooks.com/useAuth/
+
+import { createContext, useState } from "react";
+// a bug with this hook prevented me from using it 😢
+// import { useLocalStorage } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
+
+let AuthContext = createContext();
+
+// This is what we export from this file
+export default AuthContext;
+
+// Provider hook that creates auth object and handles state
+export function useProvideAuth() {
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(
+    window.localStorage.getItem("loggedIn")
+  );
+
+  function login(values, form) {
+    // Homework TODO: Add Backend Support
+    const validEmail = "tpeorocks@roblox.com";
+    const validPassword = "angularbad";
+
+    if (values.email === validEmail && values.password === validPassword) {
+      setLoggedIn(true);
+      window.localStorage.setItem("loggedIn", true);
+      // Navigate towards / page, which is relatively one directory back
+      navigate("../");
+    } else {
+      // sets and error with the form
+      form.setErrors({ email: true, password: "Invalid login" });
+    }
+  }
+
+  function logout() {
+    // In Class TODO: Implement this function
+    setLoggedIn(false);
+    window.localStorage.setItem("loggedIn", false)
+    navigate("../")
+    console.log(loggedIn);
+  }
+
+  return {
+    loggedIn,
+    login,
+    logout
+  };
+}
+
+/////////////////////// Default
+
+import React, { useContext } from "react";
+import {
+  AppShell,
+  Header,
+  createStyles,
+  Group,
+  Title,
+  Button
+} from "@mantine/core";
+import { Outlet, useNavigate } from "react-router-dom";
+import AuthContext from "../../contexts/AuthContext";
+
+const headerHeight = 80;
+
+// create Styles: define classes and their properties in JS object, can be applied within components
+const useStyles = createStyles((theme, _params, getRef) => {
+  return {
+    appShellMain: {
+      minHeight: `calc(100vh - ${headerHeight}px)`,
+      display: "flex",
+      flexDirection: "column",
+      marginTop: `${headerHeight}px`
+    },
+    header: {
+      backgroundColor: theme.primaryColor
+    },
+    headerGroup: {
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      margin: 0,
+      color: theme.primaryColor
+    }
+  };
+});
+
+export default function DefaultLayout() {
+  const { classes } = useStyles();
+  const auth = useContext(AuthContext);
+
+  const HeaderContent = (
+    <Group className={classes.headerGroup} position="apart">
+      <Title>Derek's Todo App</Title>
+      <Group>
+        <Button variant="light" color="red" onClick={() => auth.logout()}>
+          Logout
+        </Button>
+      </Group>
+    </Group>
+  );
+
+  return (
+    <AppShell
+      header={
+        <Header className={classes.header} height={headerHeight} p="md" fixed>
+          {HeaderContent}
+        </Header>
+      }
+      classNames={{
+        main: classes.appShellMain
+      }}
+    >
+      {
+        // sends user to login screen whenever the user is logged out
+        // based off the tutorial here: https://blog.utsavkumar.tech/private-routes-in-react-router-v6
+        // If logged in, navigate towards child components, else go to the login page
+        
+        // In class TODO: implement navigation
+        // Added Notes: this is making sure that the user is logged in so that they cannot just adjust the URL and access the content
+        auth.loggedIn === true ? (
+          <Outlet></Outlet>
+        ) ? (
+          <Navigate to = "/login" replace/>
+        )
+      }
+    </AppShell>
+  );
+}
+
+
+////////////////////////Login Page
+
+import { useContext } from "react";
+import { useForm } from "@mantine/form";
+import AuthContext from "../contexts/AuthContext";
+
+import {
+  createStyles,
+  Group,
+  Stack,
+  Button,
+  TextInput,
+  Title,
+  PasswordInput
+} from "@mantine/core";
+
+const useStyles = createStyles((theme, _params, getRef) => {
+  return {
+    inputWrapper: {
+      width: 250
+    }
+  };
+});
+
+export default function LoginPage() {
+  // We get this context to call the login function upon submission of the form
+  const auth = useContext(AuthContext);
+  const { classes } = useStyles();
+
+  // New Hook for Forms, should function similar to useState Hooks
+  const form = useForm({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validate: {
+      // checks to see if the value is in the form of a an email
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email")
+    }
+  });
+
+  function handleSubmit(values) {
+    //In Class TODO: Login
+    console.log(values);
+    auth.login(values, form); // Added Notes: connect to the AuthContext.js
+  }
+
+  return (
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      {/* https://mantine.dev/core/stack/ : basically a vertical flexbox */}
+      <Stack align="center" justify="center" p="xl">
+        <Title /* Size of Font*/ order={1}>Login</Title>
+        <TextInput
+          classNames={{ wrapper: classes.inputWrapper }}
+          required
+          label="Email"
+          placeholder="tpeorocks@roblox.com"
+          {...form.getInputProps("email")}
+        />
+        {/* In Class TODO: Find a way to convert this to password field (ie. password hidden) using Mantine */}
+        <PasswordInput // Added Notes: newly imported mantine component that hides the password as u type it in
+          classNames={{ wrapper: classes.inputWrapper }}
+          placeholder="angularbad"
+          label="Password"
+          required
+          {...form.getInputProps("password")}
+        />
+        {/* https://mantine.dev/core/group : basically a horizontal flexbox*/}
+        <Group position="center">
+          <Button type="submit">Login</Button>
+        </Group>
+      </Stack>
+    </form>
+  );
+}
+
+
+// ///////////////////////// APp
+
+import { Routes, Route } from "react-router-dom";
+import FullScreenLayout from "./components/Layouts/FullScreenLayout";
+import LoginPage from "./pages/LoginPage";
+import AuthContext, { useProvideAuth } from "./contexts/AuthContext";
+
+import DefaultLayout from "./components/Layouts/FullScreenLayout";
+import HomePage from "./pages/HomePage";
+
+function App() {
+  return (
+    <AuthContext.Provider value={useProvideAuth()}>
+      <Routes>
+        {/* In Class TODO: Add the second route for the homepage */}
+        <Route path = "/" element={<DefaultLayout></DefaultLayout>}>
+          <Route index element={<HomePage></HomePage>}/>
+        </Route>
+        <Route path="/login" element={<FullScreenLayout></FullScreenLayout>}>
+          {/* Index Route: A child route with no path that renders in the parent's outlet at the parent's URL */}
+          <Route index element={<LoginPage></LoginPage>}></Route>
+        </Route>
+      </Routes>
+    </AuthContext.Provider>
+  );
+}
+
+export default App;
