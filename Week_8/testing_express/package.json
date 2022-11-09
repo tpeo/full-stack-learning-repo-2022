@@ -1,0 +1,19 @@
+{
+  "name": "testing_express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.3.0",
+    "jest-cli": "^29.3.0",
+    "supertest": "^6.3.1"
+  }
+}
