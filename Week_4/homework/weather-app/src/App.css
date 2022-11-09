@@ -1,0 +1,155 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+*{
+  margin:0;
+  padding:0;
+}
+
+body {
+  height: 90vh;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+img,
+.hidden {
+  display: none;
+}
+
+img[src] {
+  display: block;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 80px;
+  padding-left: 80px;
+  background-color: #87b7ff;
+}
+
+.weather-container {
+  height: 60%;
+  width: 90%;
+}
+
+#side-container {
+  height: 100%;
+  width: 34%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#search-input {
+  padding: 10px;
+  border-radius: 5px;
+  border-width: 1px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+#search-button {
+  padding: 10px;
+  background-color: #0075ff;
+  color: #ffffff;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+.search-result:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.head {
+  text-align: left;
+  padding-bottom: 30px;
+}
+
+.date {
+  text-transform: uppercase;
+}
+
+.current {
+  margin-bottom: 50px;
+}
+
+.current img {
+  width: 200px;
+}
+.daily {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  background-color: white;
+  border-radius: 3px;
+  width: 170px;
+  height: 200px;
+  margin: 10px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 10px 16px;
+}
+
+.container h4 {
+  font-size: 14px;
+}
+.container h2 {
+  font-size: 18px;
+}
