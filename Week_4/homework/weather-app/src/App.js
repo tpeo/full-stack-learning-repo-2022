@@ -86,7 +86,7 @@ export default function App() {
 
  
   return (
-    <div>
+    <div style={{display: "flex"}}>
     {dataLoaded == true && (
       <div className="main-container">
         <div className="head">
