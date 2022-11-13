@@ -22,29 +22,81 @@ import {
 } from "@mantine/core";
 
 export default function HomePage() {
-  // toDo: an array of tasks that need to be done; setToDo: a function that allows you to modify the task variable.
-  const [tasks, setTasks] = useState([
-    { name: "create a todo app", finished: false },
-    { name: "wear a mask", finished: false },
-    { name: "play roblox", finished: false },
-    { name: "be a winner", finished: true },
-    { name: "become a tech bro", finished: true }
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+
+    fetch("https://tpeo-todo.herokuapp.com/todo/", {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+       // "Content-Type": "application/json",
+        Authorization: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFiYzEyMyIsImVtYWlsIjoiYWJjMTIzQGdtYWlsLmNvbSJ9.kVAp_XhgpFH3Iyl9cnRGUjRFYiBGuRuyYAztbNcRVLs"
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      //body: JSON.stringify({  todo: taskName }) // body data type must match "Content-Type" header
+    })
+    .then(resp => resp.json())
+    .then(json => setTasks(json))
+    .catch((err) => {
+        console.log(err);
+      });
+  });
 
   // taskName: a string of the name of task that you want to add; setToDo: a function that allows you to edit the taskName
   const [taskName, setTaskName] = useState("");
 
 
   async function addTask() {
-    await fetch("https://tpeo-todo.herokuapp.com/todo", {
-        method: 'POST',
-        mode: "cors", // no-cors, *cors, same-origin
-   //     redirect: "follow",
-   //preflight?
-        headers: {
-            Authorization: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFiYzEyMyIsImVtYWlsIjoiYWJjMTIzQGdtYWlsLmNvbSJ9.kVAp_XhgpFH3Iyl9cnRGUjRFYiBGuRuyYAztbNcRVLs",
-        },
-        body: JSON.stringify({ todo: "test task" })
+    await fetch("https://tpeo-todo.herokuapp.com/todo/", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFiYzEyMyIsImVtYWlsIjoiYWJjMTIzQGdtYWlsLmNvbSJ9.kVAp_XhgpFH3Iyl9cnRGUjRFYiBGuRuyYAztbNcRVLs"
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify({  todo: taskName }) // body data type must match "Content-Type" header
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+  // //addTask: adds a task to toDo by adding the taskName
+  // function addTask() {
+  //   // makes sure that taskName is not blank
+  //   if (taskName) {
+  //     // makes sure that taskName is a new task
+  //     tasks.includes(taskName)
+  //       ? alert("Task already exists")
+  //       : setTasks(tasks.concat({ name: taskName, completed: false }));
+  //     setTaskName("");
+  //   }
+  // }
+
+  async function updateTask(uid){
+    await fetch("https://tpeo-todo.herokuapp.com/todo/", {
+      method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFiYzEyMyIsImVtYWlsIjoiYWJjMTIzQGdtYWlsLmNvbSJ9.kVAp_XhgpFH3Iyl9cnRGUjRFYiBGuRuyYAztbNcRVLs"
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify({  uid: uid }) // body data type must match "Content-Type" header
     })
     .then(resp => resp.json())
     .then(json => console.log(json))
@@ -52,30 +104,6 @@ export default function HomePage() {
         console.log(err);
       });
 
-  }
-
-
-  // addTask: adds a task to toDo by adding the taskName
-//   function addTask() {
-//     // makes sure that taskName is not blank
-//     if (taskName) {
-//       // makes sure that taskName is a new task
-//       tasks.includes(taskName)
-//         ? alert("Task already exists")
-//         : setTasks(tasks.concat({ name: taskName, completed: false }));
-//       setTaskName("");
-//     }
-//   }
-
-  function updateTask(name) {
-    setTasks(
-      tasks.map((task) => {
-        if (task.name === name) {
-          task.finished = !task.finished;
-        }
-        return task;
-      })
-    );
   }
 
   function getSummary() {
@@ -111,10 +139,10 @@ export default function HomePage() {
         {tasks.map((task, index) => (
           <Checkbox
             checked={task.finished}
-            key={task.name}
+            key={task.uid}
             index={index}
-            label={task.name}
-            onChange={() => updateTask(task.name)}
+            label={task.todo}
+            onChange={() => updateTask(task.uid)}
           ></Checkbox>
         ))}
       </Stack>
