@@ -86,7 +86,11 @@ export default function App() {
 
  
   return (
+<<<<<<< HEAD
     <div>
+=======
+    <div style={{display: "flex"}}>
+>>>>>>> Week_5
     {dataLoaded == true && (
       <div className="main-container">
         <div className="head">
