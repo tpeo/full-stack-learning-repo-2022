@@ -86,11 +86,11 @@ export default function App() {
 
  
   return (
-<<<<<<< HEAD
+
     <div>
-=======
     <div style={{display: "flex"}}>
->>>>>>> Week_5
+
+    <div style={{display: "flex"}}>
     {dataLoaded == true && (
       <div className="main-container">
         <div className="head">
@@ -146,6 +146,8 @@ export default function App() {
             <CityList results={results} func={saveCity}></CityList>   
         </div>
       </div>
+    </div>
+    </div>
     </div>
 
   );
