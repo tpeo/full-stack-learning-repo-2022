@@ -25,8 +25,8 @@ export default function HomePage() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-
-    fetch("http://localhost:4000/", {
+    const user = window.localStorage.getItem("username");
+    fetch("http://localhost:4000/todo/" + user, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -53,7 +53,7 @@ export default function HomePage() {
 
 
   async function addTask() {
-    await fetch("http://localhost:4000/", {
+    await fetch("http://localhost:4000/todo", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -74,7 +74,7 @@ export default function HomePage() {
   }
 
   async function updateTask(uid){
-    await fetch("http://localhost:4000/", {
+    await fetch("http://localhost:4000/todo", {
       method: "DELETE", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

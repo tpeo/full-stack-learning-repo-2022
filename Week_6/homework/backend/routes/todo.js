@@ -1,6 +1,10 @@
 /** Module for handling users */
+const firebase = require("../firebase/cred.js");
 const express = require("express");
-const cors = require("cors");
+const app = express()
+const cors = require('cors')
+const db = firebase.firestore();
+require("dotenv").config();
 
 // Define route and middlewares
 const todo = express.Router();
@@ -38,6 +42,22 @@ todo.use(express.json());
   
     res.json(ret);
   });
+
+  // TODO: Integrate with Error Handler
+  todo.get("/:user_id", async (req, res) => {
+    const todo = db.collection("todos");
+  
+    const user = req.params.user_id;
+    //const todos = await todo.get(); // Since async operation, use await
+    const todos = await todo.where('email', '==', user).get();
+    const ret = todos.docs.map((obj) => obj.data());
+
+    // (todos.docs).forEach(doc => console.log(doc.id))
+    // console.log(ret);
+  
+    res.json(ret);
+  });
+
 
 
 //delete
