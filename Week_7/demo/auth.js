@@ -54,6 +54,8 @@ app.post("/register", async (req, res) => {
   const user = "";
   const token = "";
 
+  await db.collection("user").doc(username).set({username: username, password: hashedPassword, salt: SALT});
+
   // Send JWT Token
   res.json({
     msg: "successfully created",
@@ -79,6 +81,7 @@ app.post("/login", async (req, res) => {
   const user = check.data();
   // TODO: fill in samepassword
   let samePassword = false;
+  samePassword = hashedPassword === user.password;
   if (samePassword) {
     // TODO: Issue token if passwords match, else, return a 401, not authorized
     const token = ""
