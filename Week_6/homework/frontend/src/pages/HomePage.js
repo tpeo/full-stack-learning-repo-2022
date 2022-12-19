@@ -46,7 +46,7 @@ export default function HomePage() {
 
     //  console.log(window.localStorage.getItem("username"))
 
-  });
+  }, []);
 
   // taskName: a string of the name of task that you want to add; setToDo: a function that allows you to edit the taskName
   const [taskName, setTaskName] = useState("");
