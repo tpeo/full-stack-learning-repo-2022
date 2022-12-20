@@ -9,21 +9,100 @@
 
 <body>
 	<div id='main-container'>
+
+		<div class="head">
+			<h4 class="date" id="today"></h4>
+			<h1 id="location"></h1>
+		</div>
+
+		<div class="current">
+		
+			<div class="flex-container">
+				<div>
+					<h4 id="weather"></h4>
+					<h2 id="temp"></h2>
+					<h5 id="aqi"></h5>
+				</div>
+				<div>
+					<img id="image" src="">
+				</div>
+			</div>
+
+		</div>
+
+		
+
+
 		<div id='weather-container'>
+			<div class="flex-container">
+
+				<div class="card">
+					<div class="container">
+					  <h4 class="date" id="day1"></h4>
+					  <img id="image1" src="">
+					  <h2 id="low-hi1"></h2>
+					</div>
+				</div>
+
+
+				<div class="card">
+					<div class="container">
+					  <h4 class="date" id="day2"></h4>
+					  <img id="image2" src="">
+					  <h2 id="low-hi2"></h2>
+					</div>
+				</div>
+
+
+				<div class="card">
+					<div class="container">
+					  <h4 class="date" id="day3"></h4>
+					  <img id="image3" src="">
+					  <h2 id="low-hi3"></h2>
+					</div>
+				</div>
+
+
+				<div class="card">
+					<div class="container">
+					  <h4 class="date" id="day4"></h4>
+					  <img id="image4" src="">
+					  <h2 id="low-hi4"></h2>
+					</div>
+				</div>
+
+
+				<div class="card">
+					<div class="container">
+					  <h4 class="date" id="day5"></h4>
+					  <img id="image5" src="">
+					  <h2 id="low-hi5"></h2>
+					</div>
+				</div>
+
+		
+
+
+
+			</div>
+			
+
 		</div> 
 	</div>
 	<div id='side-container'>
 		<div>
 			<input id='search-input' placeholder='search for a city'></input>
 			<button id='search-button' onclick="search()">search</button>
+			<!--<button id='data-button' onclick="getData()">get data</button>-->
 		</div>
 		<ul id='search-results-list'></ul>
 	</div>
 </body>
 
 <script>
+	    
 		// USE YOUR OWN API KEY
-		const apiKey = "";
+		const apiKey = "482077a69851b3a52657d892f35a699b";
 
         // variable that stores the city that is chosen
 		let city;
@@ -31,6 +110,11 @@
 		let weather;
         // the variable that stores the air quality index for the city
 		let aqi;
+
+
+		// weekdays
+		const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		
 
 		// function that accepts that a number N and returns the name of the day and the date N days from now as a string
 		function formatDate(daysFromNow = 0) {
@@ -92,6 +176,7 @@
 			document.querySelector('#search-results-list').className = 'hidden'
 			// sets the global city variable
 			document.querySelector("#search-input").value = ''
+
 			city = {
 				fullName: fullName,
 				name: name,
@@ -100,6 +185,112 @@
 				lon: lon
 			}
             // BEGIN CODING HERE
+			getData(city);
+			
 		}
+
+		function renderHeading(city, date, temp, weather, icon) {
+			document.querySelector('#location').innerText = 'Weather for ' + city.fullName;
+			document.querySelector('#today').innerText = date;
+			document.querySelector('#temp').innerText = temp + '°';
+			document.querySelector('#weather').innerText = weather;
+			document.querySelector('#image').src = 'icons/' + icon + '.svg';
+		}
+
+
+		function getData(city) {
+			let apiCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&units=imperial&appid=${apiKey}`;
+			// calls the API
+				fetch(apiCall)
+					.then((response) => 
+						response.json()
+					)
+					.then((data) => {
+						weather = (data.current.weather)[0].main;
+						temp = data.current.temp;
+						day = new Date(data.daily[0].dt * 1000);
+						date = weekday[day.getDay()] + ' ' + day.getDate();
+						icon = data.current.weather[0].icon;
+						renderHeading(city, date, temp, weather, icon);
+						
+
+					    day1_lowtemp = (data.daily[1].temp.min).toFixed(0);
+						day1_hightemp = data.daily[1].temp.max.toFixed(0);
+						day1 = new Date(data.daily[1].dt * 1000);
+						date1 = weekday[day1.getDay()] + ' ' + day1.getDate();
+						img1 = data.daily[1].weather[0].icon;
+						renderData(date1, img1, day1_lowtemp, day1_hightemp, 1);
+						
+
+						day2_lowtemp = data.daily[2].temp.min.toFixed(0);
+						day2_hightemp = data.daily[2].temp.max.toFixed(0);
+						day2 = new Date(data.daily[2].dt * 1000);
+						date2 = weekday[day2.getDay()] + ' ' + day2.getDate();
+						img2 = data.daily[2].weather[0].icon;
+						renderData(date2, img2, day2_lowtemp, day2_hightemp, 2);
+
+
+						day3_lowtemp = data.daily[3].temp.min.toFixed(0);
+						day3_hightemp = data.daily[3].temp.max.toFixed(0);
+						day3 = new Date(data.daily[3].dt * 1000);
+						date3 = weekday[day3.getDay()] + ' ' + day3.getDate();
+						img3 = data.daily[3].weather[0].icon;
+						renderData(date3, img3, day3_lowtemp, day3_hightemp, 3);
+
+						day4_lowtemp = data.daily[4].temp.min.toFixed(0);
+						day4_hightemp = data.daily[4].temp.max.toFixed(0);
+						day4 = new Date(data.daily[4].dt * 1000);
+						date4 = weekday[day4.getDay()] + ' ' + day4.getDate();
+						img4 = data.daily[4].weather[0].icon;
+						renderData(date4, img4, day4_lowtemp, day4_hightemp, 4);
+
+
+						day5_lowtemp = data.daily[5].temp.min.toFixed(0);
+						day5_hightemp = data.daily[5].temp.max.toFixed(0);
+						day5 = new Date(data.daily[5].dt * 1000);
+						date5 = weekday[day5.getDay()] + ' ' + day5.getDate();
+						img5 = data.daily[5].weather[0].icon;
+						renderData(date5, img5, day5_lowtemp, day5_hightemp, 5);
+					
+						getAQI(city);
+						
+					});
+		}
+
+
+
+		function getAQI(city) {
+			let apiCall = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}`;
+
+				// calls the API
+				fetch(apiCall)
+					.then((response) => 
+						// after recieving a response, take the response from the server and convert it to JSON 
+						response.json()
+					)
+					.then((data) => {
+						console.log(data);
+						aqi = data.list[0].main.aqi;
+						renderAQI(aqi);
+					});
+		}
+
+		renderAQI = (aqi) => {
+			document.querySelector(`#aqi`).innerText = 'AQI: ' + aqi;
+		}
+		
+		renderData = (date, img, lowtemp, hightemp, index) => {
+
+			let doc = document.querySelectorAll(".card");
+			doc.forEach((card) => {card.style.display="block";});
+
+			
+			document.querySelector(`#day${index}`).innerText = date;
+			document.querySelector(`#image${index}`).src = 'icons/' + img + '.svg';
+			document.querySelector(`#low-hi${index}`).innerText = lowtemp + '° to ' + hightemp + '°';
+
+		}
+
 	</script>
 </html>
+

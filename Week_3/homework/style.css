@@ -27,7 +27,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding-top: 80px;
+    padding-left: 80px;
     background-color: #87b7ff;
   }
   
@@ -66,3 +67,54 @@
     cursor: pointer;
   }
   
+
+  .flex-container {
+    display: flex;
+  }
+
+
+.head{
+  text-align: left;
+  padding-bottom: 30px;
+}
+
+.date {
+  text-transform: uppercase;
+}
+
+.current{
+  margin-bottom: 50px;
+}
+
+.current img{
+  width: 200px;
+}
+  .card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: white;
+    border-radius: 3px;
+    width: 25%;
+    margin: 10px;
+    display: none;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+    padding: 10px 16px;
+  }
+
+  .container h4{
+    font-size: 14px;
+  }
+  .container h2{
+    font-size: 18px;
+  }
+
+
