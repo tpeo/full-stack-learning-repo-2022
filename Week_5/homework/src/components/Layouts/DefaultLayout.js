@@ -1,18 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   AppShell,
+  Navbar,
   Header,
+  Footer,
+  Aside,
+  Text,
+  MediaQuery,
+  Burger,
   createStyles,
+  useMantineTheme,
   Group,
   Title,
   Button
 } from "@mantine/core";
-import { Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, Navigate } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
 
 const headerHeight = 80;
 
-// create Styles: define classes and their properties in JS object, can be applied within components
 const useStyles = createStyles((theme, _params, getRef) => {
   return {
     appShellMain: {
@@ -37,11 +43,11 @@ const useStyles = createStyles((theme, _params, getRef) => {
 export default function DefaultLayout() {
   const { classes } = useStyles();
   const auth = useContext(AuthContext);
-  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [name, setName] = useState(window.localStorage.getItem("username"));
 
   const HeaderContent = (
     <Group className={classes.headerGroup} position="apart">
-      <Title>{username}'s Todo App</Title>
+      <Title>{name}'s Todo App</Title>
       <Group>
         <Button variant="light" color="red" onClick={() => auth.logout()}>
           Logout
@@ -64,16 +70,8 @@ export default function DefaultLayout() {
       {
         // sends user to login screen whenever the user is logged out
         // based off the tutorial here: https://blog.utsavkumar.tech/private-routes-in-react-router-v6
-        // If logged in, navigate towards child components, else go to the login page
-        
-        // In class TODO: implement navigation
-        // Added Notes: this is making sure that the user is logged in so that they cannot just adjust the URL and access the content
-        auth.loggedIn === true ? (
-            <Outlet></Outlet>
-          ) ? (
-            <Navigate to = "/login" replace/>
-          )
-      };
+        auth.loggedIn ? <Outlet></Outlet> : <Navigate to="/login" replace />
+      }
     </AppShell>
   );
 }

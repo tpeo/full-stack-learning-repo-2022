@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { MantineProvider, Global } from "@mantine/core";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "./App";
 
@@ -61,7 +61,7 @@ root.render(
           }
         })}
       />
-      {/* sets up React Router, have it at the top level and define routes below*/}
+      {/* sets up React Router */}
       <BrowserRouter>
         <App />
       </BrowserRouter>

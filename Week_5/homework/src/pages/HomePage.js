@@ -23,7 +23,6 @@ import {
 
 export default function HomePage() {
   // toDo: an array of tasks that need to be done; setToDo: a function that allows you to modify the task variable.
-
   const [tasks, setTasks] = useState([
     { name: "create a todo app", finished: false },
     { name: "wear a mask", finished: false },
@@ -48,14 +47,14 @@ export default function HomePage() {
   }
 
   function updateTask(name) {
-    // In class TODO: implement update task
-    let arr = [];
-    tasks.forEach((task) => {
-      if (name === task.name) {
-        task.finished = !task.finished;
-      }
-      arr.push(task);
-    });
+    setTasks(
+      tasks.map((task) => {
+        if (task.name === name) {
+          task.finished = !task.finished;
+        }
+        return task;
+      })
+    );
   }
 
   function getSummary() {

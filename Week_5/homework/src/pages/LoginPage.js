@@ -1,16 +1,29 @@
-import { useContext } from "react";
+import { useEffect, useState, Fragment, useContext } from "react";
 import { useForm } from "@mantine/form";
 import AuthContext from "../contexts/AuthContext";
 
 import {
+  AppShell,
+  Navbar,
+  Header,
+  Footer,
+  Aside,
+  Text,
+  MediaQuery,
+  Burger,
   createStyles,
+  useMantineTheme,
   Group,
+  Center,
   Stack,
+  Input,
   Button,
+  Checkbox,
   TextInput,
-  Title,
-  PasswordInput
+  PasswordInput,
+  Title
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme, _params, getRef) => {
   return {
@@ -21,11 +34,9 @@ const useStyles = createStyles((theme, _params, getRef) => {
 });
 
 export default function LoginPage() {
-  // We get this context to call the login function upon submission of the form
   const auth = useContext(AuthContext);
   const { classes } = useStyles();
 
-  // New Hook for Forms, should function similar to useState Hooks
   const form = useForm({
     initialValues: {
       email: "",
@@ -38,16 +49,14 @@ export default function LoginPage() {
   });
 
   function handleSubmit(values) {
-    //In Class TODO: Login
-    console.log(values);
-    auth.login(values, form); // Added Notes: connect to the AuthContext.js
+    console.log(form, values);
+    auth.login(values, form);
   }
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
-      {/* https://mantine.dev/core/stack/ : basically a vertical flexbox */}
       <Stack align="center" justify="center" p="xl">
-        <Title /* Size of Font*/ order={1}>Login</Title>
+        <Title order={1}>Login</Title>
         <TextInput
           classNames={{ wrapper: classes.inputWrapper }}
           required
@@ -55,15 +64,13 @@ export default function LoginPage() {
           placeholder="tpeorocks@roblox.com"
           {...form.getInputProps("email")}
         />
-        {/* In Class TODO: Find a way to convert this to password field (ie. password hidden) using Mantine */}
-        <PasswordInput // Added Notes: newly imported mantine component that hides the password as u type it in
+        <PasswordInput
           classNames={{ wrapper: classes.inputWrapper }}
           placeholder="angularbad"
           label="Password"
           required
           {...form.getInputProps("password")}
         />
-        {/* https://mantine.dev/core/group : basically a horizontal flexbox*/}
         <Group position="center">
           <Button type="submit">Login</Button>
         </Group>
