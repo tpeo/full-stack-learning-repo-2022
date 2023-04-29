@@ -16,7 +16,7 @@ Here's what you'll learn from this course:
 
 [TPEO Main Website](https://txproduct.org/Full-Stack-Engineering-bb7fd893a34c4cdb909a5ffb4ccea3a3)
 
-[Engineering Lesson Slides on Google Drive](https://drive.google.com/drive/folders/15AveQkwuQw6uijFfa7o9sJgPdRzQxkR9?usp=sharing)
+[Engineering Lesson Slides on Youtube](https://www.youtube.com/playlist?list=PLBlT_AH67OenYlVAHKpSqLvXH21mDbzrE)
 
 [Recordings for Lectures (TBD)](https://drive.google.com/drive/folders/1HFL9_G9fV75kmi2r5urgElj8kPPW8Whg?usp=sharing)
 
