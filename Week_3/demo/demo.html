@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">  
+      <button onclick="addToList()" id="add-button">Add item</button>
+    </div>
+
+    <ul id="Shopping-List">
+
+    </ul>
+
+    <script>
+        const localStorageList = localStorage.getItem("shoppingList");
+        if(localStorageList) {  //checks if null
+            const deSerialized = JSON.parse(localStorageList);
+            deSerialized.forEach(elem => {addToListTwo(elem)});
+            //localStorage.setItem("shoppingList",JSON.stringify(deSerialized))
+        }
+        function addToList() {
+            const item = document.getElementById("item")
+            console.log(item.value)
+            addToListTwo(item.value);
+            item.value = ""
+            item.focus()
+        }
+        function addToListTwo(elemText) {
+            const list = document.querySelector('ul');
+            const listItem = document.createElement('li');
+            const textItem = elemText;
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = "Delete";
+            const saveButton = document.createElement('button');
+            saveButton.innerText = "Save";
+            //listItem.innerTest = "Soap";
+            listItem.innerText = elemText
+            listItem.appendChild(deleteButton);
+            listItem.appendChild(saveButton);
+            list.appendChild(listItem);
+            
+           deleteButton.addEventListener('click', () => {
+                list.removeChild(listItem);
+            })
+            saveButton.addEventListener('click', () => {
+                const localStorageList = localStorage.getItem("shoppingList");
+                if(!localStorageList) {
+                    console.log(elemText);
+                    localStorage.setItem("shoppingList", JSON.stringify([elemText]));
+                }
+                else {
+                    console.log(elemText)
+                    const deSerialized = JSON.parse(localStorageList);
+                    deSerialized.push(elemText);
+                    serialized = JSON.stringify(deSerialized);
+                    localStorage.setItem("shoppingList", serialized);
+                }
+            })
+        }
+        
+    </script>
+  </body>
+</html>
