@@ -1,0 +1,39 @@
+section{
+    float: left;
+    margin: 0 1.5%;
+    width: 63%;
+}
+
+hr{
+    border: 5%;
+}
+
+article{
+    display: block;
+}
+
+aside{
+    font-size: larger;
+    color:blue;
+    float: left;
+    margin: 0 1.5%;
+    width: 25%;
+    display:block;
+}
+
+section {
+    float: right;
+    margin: 0 1.5%;
+    width: 65%;
+    display:block;
+}
+
+footer {
+    clear: both;
+    margin-bottom: 0;
+}
+  
+.year{
+    display:flex;
+    align-items: flex-end;
+}
